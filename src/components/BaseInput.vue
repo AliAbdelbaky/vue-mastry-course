@@ -1,7 +1,7 @@
 <template>
     <div>
         <label :for="id" v-if="label">{{label}}</label>
-        <input :id="id" :value="value" type="text" @input="updateValue" v-bind="$attrs">
+        <input v-on="listeners" :id="id" :value="value" type="text" @input="updateValue" v-bind="$attrs">
     </div>
 </template>
 <script>
@@ -26,6 +26,14 @@ export default {
         generateID() {
             const id = Math.floor(Math.random() * 10000000)
             this.id = `${id}_input`
+        }
+    },
+    computed:{
+        listeners(){
+            return{
+                ...this.$listeners,
+                input: this.updateValue
+            }
         }
     },
     created(){
