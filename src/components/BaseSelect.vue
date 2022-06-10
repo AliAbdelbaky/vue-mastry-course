@@ -1,9 +1,9 @@
 <template>
     <div>
-        <label :for="id" v-if="label">{{ label }}</label>
+        <label :for="generateID" v-if="label">{{ label }}</label>
         <select
             v-on="listeners"
-            :id="id"
+            :id="generateID"
             :value="value"
             type="text"
             @input="updateValue"
@@ -20,43 +20,15 @@
     </div>
 </template>
 <script>
+import { globalInputs } from '@/mixins/formFieldMixin' // import mixin
+
 export default {
-    inheritAttrs: false,
-    data() {
-        return {
-            id: '',
-        }
-    },
+    mixins: [globalInputs],
     props: {
-        label: {
-            type: String,
-            default: '',
-        },
-        value: [String, Number],
         options: {
             type: Array,
             required: true,
         },
-    },
-    methods: {
-        updateValue(event) {
-            this.$emit('input', event.target.value)
-        },
-        generateID() {
-            const id = Math.floor(Math.random() * 10000000)
-            this.id = `${id}_select`
-        },
-    },
-    computed: {
-        listeners() {
-            return {
-                ...this.$listeners,
-                input: this.updateValue,
-            }
-        },
-    },
-    created() {
-        this.generateID()
     },
 }
 </script>

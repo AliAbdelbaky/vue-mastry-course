@@ -1,43 +1,29 @@
 <template>
     <div>
-        <label :for="id" v-if="label">{{label}}</label>
-        <input v-on="listeners" :id="id" :value="value" type="text" @input="updateValue" v-bind="$attrs">
+        <label :for="generateID" v-if="label">{{ label }}</label>
+        <input
+            :value="value"
+            @input="updateValue"
+            v-bind="$attrs"
+            v-on="listeners"
+            :id="generateID"
+        />
     </div>
 </template>
 <script>
+import { globalInputs } from '@/mixins/formFieldMixin' // import mixin
 export default {
-    inheritAttrs: false,
-    data() {
-        return {
-            id: ''
-        }
-    },
+    mixins: [globalInputs], // register mixin
     props: {
-        label: {
-            type: String,
-            default: ''
-        },
-        value: [String, Number]
+        value: [String, Number],
     },
-    methods: {
-        updateValue(event) {
-            this.$emit('input', event.target.value)
-        },
-        generateID() {
-            const id = Math.floor(Math.random() * 10000000)
-            this.id = `${id}_input`
-        }
-    },
-    computed:{
-        listeners(){
-            return{
+    computed: {
+        listeners() {
+            return {
                 ...this.$listeners,
-                input: this.updateValue
+                input: this.updateValue,
             }
-        }
+        },
     },
-    created(){
-        this.generateID()
-    }
 }
 </script>
