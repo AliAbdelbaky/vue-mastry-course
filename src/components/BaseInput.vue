@@ -11,7 +11,7 @@
     </div>
 </template>
 <script>
-import { globalInputs } from '@/mixins/formFieldMixin' // import mixin
+import { globalInputs } from '@/core/mixins/formFieldMixin' // import mixin
 export default {
     mixins: [globalInputs], // register mixin
     props: {
