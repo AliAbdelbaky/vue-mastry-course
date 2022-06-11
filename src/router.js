@@ -8,6 +8,7 @@ import store from '@/store/store'
 import NotFound from '@/views/NotFound.vue';
 import NetworkIssue from '@/views/NetworkIssue.vue';
 import Example from '@/views/Example.vue';
+import LoginForm from '@/components/LoginForm.vue';
 
 Vue.use(Router)
 
@@ -55,6 +56,11 @@ const router = new Router({
             name: 'example',
             path: '/example',
             component: Example
+        },
+        {
+            name: 'login',
+            path: '/login',
+            component: LoginForm
         },
         {
             path: '/404',

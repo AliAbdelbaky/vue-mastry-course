@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <Fragment>
         <label :for="generateID" v-if="label">{{ label }}</label>
         <input
             :value="value"
@@ -8,15 +8,18 @@
             v-on="listeners"
             :id="generateID"
         />
-    </div>
+    </Fragment>
 </template>
 <script>
-import { globalInputs } from '@/core/mixins/formFieldMixin' // import mixin
+import { globalInputs } from '@/core/mixins/formFieldMixin'
+import { Fragment } from 'vue-fragment' // import mixin
+
 export default {
     mixins: [globalInputs], // register mixin
     props: {
         value: [String, Number],
     },
+    components: { Fragment },
     computed: {
         listeners() {
             return {
